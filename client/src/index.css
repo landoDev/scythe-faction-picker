@@ -5,6 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("https://geekandsundry.com/wp-content/uploads/2016/11/pic3163924.jpg");
+  background-repeat: no-repeat, center;
+  background-color: #FFFFFF;
+  background-position: center;
+  background-size: cover;
+  height: 1000px;
 }
 
 code {
