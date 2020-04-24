@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+.title {
+  color: whitesmoke;
+  margin-top: 5%;
+  text-shadow: 2px 2px 2px black;
+  font-size: 4rem;
+}
+
+
 .player-container {
   display: flex;
   justify-content: center;
@@ -12,6 +20,7 @@
   padding: 2% 0;
   border: 2px solid black;
   background-color: #4f666a;
+  box-shadow: 1px 2.5px black;
 }
 .inputs {
   display: flex;
@@ -34,4 +43,54 @@
   bottom: 0;
   width: 100%;
   height: 2.5rem;            
+}
+
+
+.player-container.all{
+  flex-direction: column;
+  color: whitesmoke;
+  width: 25%;
+}
+
+.player{
+  border-bottom: 1px solid black;
+  margin-bottom: 5%;
+  width: 90%;
+}
+
+/* Media Query */
+@media(max-width: 600px) {
+  .title{
+    text-align: center;
+    font-size: 2.5rem;
+  }
+  .player-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 90%;
+    padding: 2% 0;
+    border: 2px solid black;
+    background-color: #4f666a;
+  }
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-left: 5%;
+  }
+  .add-btn {
+    align-self: center;
+    margin-top: 5%;
+  }
+  .name-label {
+    align-self: flex-start;
+    font-size: 1.5rem;
+    color: whitesmoke;
+  }
+
+  .player-container.all{
+    width: 90%;
+  }
+
 }

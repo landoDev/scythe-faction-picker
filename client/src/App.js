@@ -56,7 +56,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>Scythe Faction Selector</h1>
+        <h1 className='title'>Scythe Faction Selector</h1>
       </header>
       <form className='player-container' onSubmit={addPlayer}>
         <div className='inputs'>
@@ -67,7 +67,7 @@ function App() {
         }
         </div>
       </form>
-      <div className='player-container'>
+      <div className='player-container all'>
         {playersEmpty ? <div>No players yet</div>:
           players.map(player =>{
             return(
