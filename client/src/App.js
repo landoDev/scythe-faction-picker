@@ -3,6 +3,7 @@ import { Button, Spinner } from 'reactstrap';
 import './App.css';
 
 function App() {
+  console.log('Ahem... Can I help you? 🤨')
   const [playersEmpty, setPlayersEmpty] = useState(true)
   const [isPicking, setIsPicking] = useState(false);
   const [factionArr, setFactionArr] = useState([
@@ -33,7 +34,6 @@ function App() {
     e.preventDefault();
     setIsPicking(true);
     let playerFaction = pickFaction();
-    console.log('player faction' , playerFaction)
     newPlayer.faction = playerFaction;
     setPlayers([...players, newPlayer])
     setPlayersEmpty(false)
@@ -42,17 +42,13 @@ function App() {
 
   const pickFaction = () =>{
     let draw = Math.floor(Math.random() * factionArr.length);
-    console.log('draw', draw)
     const chosen = factionArr[draw];
-    console.log('chosen before filter', chosen)
     let updatedList = factionArr.filter(faction => {
       return faction !== chosen;
     })
     setFactionArr(updatedList);
-    console.log('chosen', chosen)
     return chosen;
   }
-  console.log('once', players)
   return (
     <div className="App">
       <header>
