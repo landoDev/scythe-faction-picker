@@ -3,6 +3,7 @@ import { Button, Spinner } from 'reactstrap';
 import './App.css';
 
 function App() {
+  const [playersEmpty, setPlayersEmpty] = useState(true)
   const [isPicking, setIsPicking] = useState(false);
   const [factionArr, setFactionArr] = useState([
     'Republic of Polania',
@@ -35,6 +36,7 @@ function App() {
     console.log('player faction' , playerFaction)
     newPlayer.faction = playerFaction;
     setPlayers([...players, newPlayer])
+    setPlayersEmpty(false)
     setIsPicking(false);
   }
 
@@ -50,21 +52,23 @@ function App() {
     console.log('chosen', chosen)
     return chosen;
   }
-  console.log('once', factionArr)
+  console.log('once', players)
   return (
     <div className="App">
       <header>
         <h1>Scythe Faction Selector</h1>
       </header>
-      <form onSubmit={addPlayer}>
-        <label>Player Name</label>
-        <input name='name' onChange={handleChanges}/>
-        {isPicking ? <Spinner color='warning' />
-        :<Button type='submit' color='success'>Add</Button>
+      <form className='player-container' onSubmit={addPlayer}>
+        <div className='inputs'>
+          <label className='name-label'>Player Name</label>
+          <input name='name' onChange={handleChanges}/>
+        {isPicking ? <Spinner className='add-btn' color='warning' />
+        :<Button className='add-btn' type='submit' color='success'>Add</Button>
         }
+        </div>
       </form>
-      <div className='playersAll'>
-        {players === [] ? <div>No players yet</div>:
+      <div className='player-container'>
+        {playersEmpty ? <div>No players yet</div>:
           players.map(player =>{
             return(
               <div className='player' key={player.name}>
