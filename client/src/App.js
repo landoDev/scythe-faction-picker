@@ -3,7 +3,14 @@ import { Button, Spinner } from 'reactstrap';
 import './App.css';
 
 function App() {
-  console.log('Ahem... Can I help you? 🤨')
+  console.log('Ahem... Can I help you? 🤨');
+  // uncommenting this adds the alert box on render
+  // useEffect(()=>{
+  //   alert("Picker includes the expansion. Refreshing this page will reset the picker.")
+  // }, []);
+
+  // Handled state (hopefully self-explanatory. If not my bad lol)
+  // If routing is introduced for any reason or if much more state is introduced may want to look at using Context. May want to for practice anyway.
   const [playersEmpty, setPlayersEmpty] = useState(true)
   const [isPicking, setIsPicking] = useState(false);
   const [factionArr, setFactionArr] = useState([
@@ -51,7 +58,7 @@ function App() {
     setPlayersEmpty(false)
     setIsPicking(false);
   }
-
+// Picker functions that set the state for the player added
   const pickFaction = () =>{
     let draw = Math.floor(Math.random() * factionArr.length);
     const chosen = factionArr[draw];
