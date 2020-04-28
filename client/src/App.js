@@ -15,10 +15,20 @@ function App() {
     'Clan Albion',
     'Togawa Shogunate'
   ])
+  const [playerMat, setPlayerMat] = useState([
+    'Engineering (2)',
+    'Patriotic (3)',
+    'Industrial (1)',
+    'Agricultural (5)',
+    'Innovative (3A)',
+    'Militant (2A)',
+    'Mechanical (4)'
+  ])
   const [players, setPlayers] = useState([])
   const [newPlayer, setNewPlayer] = useState({
     name: '',
-    faction: ''
+    faction: '',
+    player_mat: ''
   })
 
   const handleChanges = e => {
@@ -34,7 +44,9 @@ function App() {
     e.preventDefault();
     setIsPicking(true);
     let playerFaction = pickFaction();
+    let chosenMat = pickMat();
     newPlayer.faction = playerFaction;
+    newPlayer.player_mat = chosenMat;
     setPlayers([...players, newPlayer])
     setPlayersEmpty(false)
     setIsPicking(false);
@@ -49,6 +61,17 @@ function App() {
     setFactionArr(updatedList);
     return chosen;
   }
+
+  const pickMat = () =>{
+    let draw = Math.floor(Math.random() * playerMat.length);
+    const chosen = playerMat[draw];
+    let updatedList = playerMat.filter(faction => {
+      return faction !== chosen;
+    })
+    setPlayerMat(updatedList);
+    return chosen;
+  }
+
   return (
     <div className="App">
       <header>
@@ -70,6 +93,7 @@ function App() {
               <div className='player' key={player.name}>
                 <h2>{player.name}</h2>
                 <p>{player.faction}</p>
+                <p>{player.player_mat}</p>
               </div>
             ) 
           })
