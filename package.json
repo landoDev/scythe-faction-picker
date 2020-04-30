@@ -4,6 +4,7 @@
   "description": "Simple FE app to randomize A faction to play as if you can't choose",
   "main": "index.js",
   "scripts": {
+    "server": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
