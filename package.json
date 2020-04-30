@@ -1,0 +1,23 @@
+{
+  "name": "scythe-faction-picker",
+  "version": "1.0.0",
+  "description": "Simple FE app to randomize A faction to play as if you can't choose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/landoDev/scythe-faction-picker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/landoDev/scythe-faction-picker/issues"
+  },
+  "homepage": "https://github.com/landoDev/scythe-faction-picker#readme",
+  "dependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
