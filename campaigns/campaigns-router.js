@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const Campaigns = require('./campaigns-model');
+const check = require('../middleware/index')
 
 router.get('/', (req, res) => {
     return Campaigns.find()
@@ -12,7 +13,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', check.verifyGetCampaign,(req, res) => {
     const { id } = req.params;
     Campaigns.findById(id).then(campaign =>{
         console.log('the returned campaign', campaign)
@@ -31,7 +32,7 @@ router.get('/:id', (req, res) => {
 });
 
 // add campaign with code
-router.post('/', (req, res) => {
+router.post('/', check.verifyPostCampaign, (req, res) => {
     const newCampaign = req.body;
     Campaigns.add(newCampaign)
     .then(campaign => {
@@ -43,7 +44,7 @@ router.post('/', (req, res) => {
 });
 
 // uses campaign id to add players
-router.post('/:id', (req, res) => {
+router.post('/:id', check.verifyPlayerBody, (req, res) => {
     const { id } = req.params;
     const connection = {};
     connection.campaign_id = id;
