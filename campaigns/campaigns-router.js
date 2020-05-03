@@ -30,9 +30,21 @@ router.get('/:id', (req, res) => {
     })
 });
 
-
-
+// add campaign with code
 router.post('/', (req, res) => {
+    const newCampaign = req.body;
+    Campaigns.add(newCampaign); // need to add promise
+});
+
+// uses campaign id to add players
+router.post('/:id', (req, res) => {
+    const { id } = req.params;
+    let newPlayer = req.body;
+    newPlayer.campaign_id = id;
+    Campaigns.addPlayers(newPlayer); // need to add promise
+});
+// an alternative would be to have a /players to post to then findBy(code) ?
+router.post('/players', (req, res) => {
     return null;
 });
 
@@ -40,7 +52,7 @@ router.put('/:id', (req, res) => {
     return null;
 });
 
-// delete campaign
+// delete entire campaign
 router.delete('/:id', (req, res) => {
     return null;
 });
