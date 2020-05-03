@@ -48,12 +48,9 @@ router.post('/:id', (req, res) => {
     const connection = {};
     connection.campaign_id = id;
     let newPlayer = req.body;
-    Campaigns.addPlayers(newPlayer)
+    Campaigns.addPlayers(newPlayer, connection)
     .then(player => {
       res.status(201).json(player)
-    })
-    .then(connect => {
-        Campaigns.connectTables()
     })
     .catch(err => {
         res.status(500).json({error: "Server could not add player to this campaign", error: err})
