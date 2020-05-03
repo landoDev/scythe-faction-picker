@@ -33,20 +33,36 @@ router.get('/:id', (req, res) => {
 // add campaign with code
 router.post('/', (req, res) => {
     const newCampaign = req.body;
-    Campaigns.add(newCampaign); // need to add promise
+    Campaigns.add(newCampaign)
+    .then(campaign => {
+      res.status(201).json(campaign)
+    })
+    .catch(err => {
+        res.status(500).json({error: "Server could not add the campaign", error: err})
+    });
 });
 
 // uses campaign id to add players
 router.post('/:id', (req, res) => {
     const { id } = req.params;
+    const connection = {};
+    connection.campaign_id = id;
     let newPlayer = req.body;
-    newPlayer.campaign_id = id;
-    Campaigns.addPlayers(newPlayer); // need to add promise
+    Campaigns.addPlayers(newPlayer)
+    .then(player => {
+      res.status(201).json(player)
+    })
+    .then(connect => {
+        Campaigns.connectTables()
+    })
+    .catch(err => {
+        res.status(500).json({error: "Server could not add player to this campaign", error: err})
+    }); // need to add promise
 });
 // an alternative would be to have a /players to post to then findBy(code) ?
-router.post('/players', (req, res) => {
-    return null;
-});
+// router.post('/players', (req, res) => {
+//     return null;
+// });
 
 router.put('/:id', (req, res) => {
     return null;

@@ -8,6 +8,8 @@ module.exports = {
     update,
     remove,
     getCampaignInfo,
+    addPlayers,
+    connectTables
 };
 
 function find() {
@@ -49,3 +51,17 @@ function remove(id) {
       .where('id', id)
       .del();
 };
+
+// takes two arguments to tie the player to the given campaign
+async function addPlayers(player, connect) {
+    const [id] = await db("players").insert(player, "id");
+    connect.player_id = id;
+    console.log('checking connection before passing it', connect);
+    connectTables(connect)
+    return findById(id);
+  }
+
+  async function connectTables(connection) {
+    const [id] = await db("campaigns_players").insert(connection, "id");
+    return findById(id); // not sure what to return
+  }
