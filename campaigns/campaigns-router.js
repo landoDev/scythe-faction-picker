@@ -15,7 +15,7 @@ router.get('/:id', (req, res) => {
         .then(details => {
         console.log('details in get', details)
         // I'd like to return the campaign with a players key with an array of players
-        response.details
+        response.players = details;
         res.status(200).json(response);
         })
         .catch(err => {
