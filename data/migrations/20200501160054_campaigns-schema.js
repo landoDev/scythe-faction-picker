@@ -13,8 +13,20 @@ exports.up = function(knex) {
   })
   .createTable('campaigns_players', tbl =>{
     tbl.increments(); // id
-    tbl.integer('campaign_id', 255);
-    tbl.string('player_id', 255);
+    tbl.integer('campaign_id', 255)
+    .unsigned()
+    .notNullable()
+    .references('id')
+    .inTable('campaigns')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE');
+    tbl.string('player_id', 255)
+    .unsigned()
+    .notNullable()
+    .references('id')
+    .inTable('players')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE');
 })
 };
 
