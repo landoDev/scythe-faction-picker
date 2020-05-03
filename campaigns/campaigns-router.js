@@ -6,6 +6,7 @@ const check = require('../middleware/index')
 router.get('/', (req, res) => {
     return Campaigns.find()
     .then(campaigns => {
+        console.log('find campaigns', campaigns)
         res.status(200).json(campaigns)
     })
     .catch(err => {
@@ -39,6 +40,7 @@ router.post('/', check.verifyPostCampaign, (req, res) => {
       res.status(201).json(campaign)
     })
     .catch(err => {
+        console.log('post vampaign', err)
         res.status(500).json({error: "Server could not add the campaign", error: err})
     });
 });
