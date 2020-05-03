@@ -3,7 +3,13 @@ const router = express.Router();
 const Campaigns = require('./campaigns-model');
 
 router.get('/', (req, res) => {
-    return null;
+    return Campaigns.find()
+    .then(campaigns => {
+        res.status(200).json(campaigns)
+    })
+    .catch(err => {
+        res.status(500).json({error: 'Server could not get the list of users', error: err})
+    });
 });
 
 router.get('/:id', (req, res) => {
