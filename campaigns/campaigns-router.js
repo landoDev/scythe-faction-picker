@@ -27,6 +27,7 @@ router.get('/:id', check.verifyGetCampaign,(req, res) => {
         res.status(200).json(response);
         })
         .catch(err => {
+            console.log('get campaign by id', err)
         res.status(500).json({errorMessage: 'Server could not get the campaign', error: err})
         })
     })

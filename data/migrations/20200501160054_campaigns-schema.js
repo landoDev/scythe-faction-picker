@@ -4,7 +4,7 @@ exports.up = function(knex) {
   .createTable('campaigns', tbl => {
       tbl.increments(); // id
       tbl.string('code', 8).unique().notNullable();
-      tbl.date('created');
+      tbl.date('created'); // should be not nullable
   })
   .createTable('players', tbl =>{
       tbl.increments(); // id

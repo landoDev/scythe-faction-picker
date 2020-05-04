@@ -20,9 +20,8 @@ function findBy(filter) {
   return db("campaigns").where(filter);
 }
 
-async function add(code) {
-  const [id] = await db("campaigns").insert(code, "id");
-
+async function add(campaign) {
+  const [id] = await db("campaigns").insert(campaign, "id");
   return findById(id);
 }
 
@@ -34,9 +33,10 @@ function findById(id) {
 }
 
 function getCampaignInfo(id) {
-	return db('campaign')
-		.join('players', 'players.campaign_id', 'campaign.id')
-		.where('campaign.id', id)
+    return db('campaigns')
+        .join('campaigns_players as cp', 'cp.campaign_id', 'campaigns.id' )
+		.join('players', 'players.id', 'cp.player_id')
+		.where('campaigns.id', id)
 		.select('player_name', 'faction')
 }
 
