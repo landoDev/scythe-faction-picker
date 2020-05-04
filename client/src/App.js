@@ -31,7 +31,7 @@ function App() {
       <Route path='/create-campaign'>
         <CreateCampaignForm />
       </Route>
-      <Route path='/create-campaign/players'>
+      <Route exact path='/campaign/add-players'>
         <AddPlayers />
       </Route>
       <footer className='signature'>Developed by Landon Turner</footer>
