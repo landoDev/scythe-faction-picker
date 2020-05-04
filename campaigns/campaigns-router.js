@@ -54,7 +54,7 @@ router.post('/:id', check.verifyPlayerBody, (req, res) => {
     let newPlayer = req.body;
     Campaigns.addPlayers(newPlayer, connection)
     .then(player => {
-      res.status(201).json(player)
+      res.status(201).json({ message: 'new player successfully added to campaign'})
     })
     .catch(err => {
         res.status(500).json({error: "Server could not add player to this campaign", error: err})
