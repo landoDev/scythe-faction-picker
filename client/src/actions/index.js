@@ -1,17 +1,19 @@
 import axios from 'axios';
 
-export const FETCH_DATA = 'FETCH_DATA'
+export const FETCH_DATA = 'FETCH_DATA';
+export const GET_CAMPAIGNS = 'GET_CAMPAIGNS';
+export const SET_ERROR = 'SET_ERROR';
 
 
 export const getCampaignsAll = () => dispatch =>{
   dispatch({type: FETCH_DATA});
-  axios.get('http://localhost:3333/smurfs')
+  axios.get('https://scythe-campaigns.herokuapp.com/api/campaigns')
   .then(res=>{
-    dispatch({type: GET_SMURFS, payload: res.data})
+    dispatch({type: GET_CAMPAIGNS, payload: res.data})
   })
   .catch(err=>{
     console.log(err)
-    dispatch({type: SET_ERROR, payload: 'Gargamel has, at long last, turned the smurfs into gold'})
+    dispatch({type: SET_ERROR, payload: 'Error getting campaigns'})
   })
 }
 
