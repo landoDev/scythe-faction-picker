@@ -44,18 +44,29 @@ export const campaignReducer = (state = initialState, action) => {
             ...state,
             error: action.payload
         };
-      case FETCH_DATA:
+    case FETCH_DATA:
+    return {
+        ...state,
+        isFetching: true
+    };
+    case POST_DATA:
         return {
-          ...state,
-          isFetching: true
+            ...state,
+            isPosting: true,
         };
-        case GET_CAMPAIGNS:
-            return {
-                ...state,
-                campaigns: action.payload,
-                isFetching: false
-            }
-      default:
-        return state;
+    case GET_CAMPAIGNS:
+        return {
+            ...state,
+            campaigns: action.payload,
+            isFetching: false
+        }
+    case ADD_CAMPAIGN_SUCCESS:
+    return {
+        ...state,
+        campaigns: [...state.campaigns, action.payload], // keep an eye on this, I think if I just make another get it will be fine. May double entries?
+        isFetching: false
+    }
+    default:
+    return state;
     }
   };
