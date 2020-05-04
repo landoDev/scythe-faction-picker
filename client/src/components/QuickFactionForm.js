@@ -3,7 +3,6 @@ import { Button, Spinner } from 'reactstrap';
 // import './App.css';
 
 const QuickFactionForm = () => {
-  console.log('Ahem... Can I help you? 🤨');
   // uncommenting this adds the alert box on render
   // useEffect(()=>{
   //   alert("Picker includes the expansion. Refreshing this page will reset the picker.")

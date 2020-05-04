@@ -3,7 +3,8 @@ const Campaigns = require('../campaigns/campaigns-model');
 module.exports = {
     verifyGetCampaign,
     verifyPostCampaign,
-    verifyPlayerBody
+    verifyPlayerBody, 
+    corsProxy
 }
 
 function verifyGetCampaign(req, res, next) {
@@ -44,4 +45,10 @@ function verifyPlayerBody(req, res, next) {
       }
       next();
       }
+};
+
+function corsProxy(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 }
