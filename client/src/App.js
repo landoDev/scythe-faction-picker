@@ -10,7 +10,6 @@ function App() {
   // }, []);
 
   // Handled state (hopefully self-explanatory. If not my bad lol)
-  // If routing is introduced for any reason or if much more state is introduced may want to look at using Context. May want to for practice anyway.
   const [playersEmpty, setPlayersEmpty] = useState(true)
   const [isPicking, setIsPicking] = useState(false);
   const [factionArr, setFactionArr] = useState([

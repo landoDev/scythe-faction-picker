@@ -4,7 +4,7 @@ const Campaigns = require('./campaigns-model');
 const check = require('../middleware/index')
 
 router.get('/', (req, res) => {
-    return Campaigns.find()
+    return Campaigns.find() 
     .then(campaigns => {
         console.log('find campaigns', campaigns)
         res.status(200).json(campaigns)

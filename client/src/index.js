@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import campaignReducer from './reducers';
+import { campaignReducer } from './reducers/campaignReducer';
 
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
