@@ -2,10 +2,10 @@
   "name": "scythe-faction-picker",
   "version": "1.0.0",
   "description": "Simple FE app to randomize A faction to play as if you can't choose",
+  "main": "index.js",
   "engines": {
     "node": "12.16.x"
   },
-  "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "server": "nodemon",
