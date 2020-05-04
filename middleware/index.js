@@ -4,7 +4,6 @@ module.exports = {
     verifyGetCampaign,
     verifyPostCampaign,
     verifyPlayerBody, 
-    corsProxy
 }
 
 function verifyGetCampaign(req, res, next) {
