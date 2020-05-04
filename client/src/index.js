@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { campaignReducer } from './reducers/campaignReducer';
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -10,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(campaignReducer);
+const store = createStore(campaignReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <React.StrictMode>

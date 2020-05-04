@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { createCampaign } from '../actions/index'
 import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
@@ -14,13 +16,13 @@ const CreateCampaignForm = props => {
         });
       };
 
-    // can uncomment and assign after you connect component to store
-    // const onSubmit = (e) => {
-    //     e.preventDefault();
-    //     let utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
-    //     newCampaign.created = utc;
-    //     props.createCampaign(newCampaign);
-    // }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        let utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+        newCampaign.created = utc;
+        props.createCampaign(newCampaign);
+    }
 
     return (
         <div>
@@ -35,4 +37,10 @@ const CreateCampaignForm = props => {
     )
 }
 
-export default CreateCampaignForm;
+const mapStateToProps = state => {
+   return {
+    isPosting: state.isPosting
+   } 
+}
+
+export default connect(mapStateToProps, { createCampaign })(CreateCampaignForm);
