@@ -20,9 +20,11 @@ export const getCampaignsAll = () => dispatch =>{
 };
 
 export const createCampaign = (payload) => dispatch =>{
+    console.log('just before post')
     dispatch({type: POST_DATA});
     axios.post('https://scythe-campaigns.herokuapp.com/api/campaigns', payload)
     .then(res=>{
+        console.log('response in create dispatch', res)
       dispatch({type: ADD_CAMPAIGN_SUCCESS, payload: res.data})
     })
     .catch(err=>{

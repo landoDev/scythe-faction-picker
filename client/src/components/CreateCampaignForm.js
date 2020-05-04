@@ -6,7 +6,9 @@ import { Button, Spinner } from 'reactstrap';
 
 const CreateCampaignForm = props => {
     const history = useHistory();
-    console.log(history)
+    if(props.error === ''){
+        console.log('error is an empty string')
+    }
     const [newCampaign, setNewCampaign] = useState({
         code: '',
         created: null
@@ -24,7 +26,13 @@ const CreateCampaignForm = props => {
         let utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
         newCampaign.created = utc;
         props.createCampaign(newCampaign);
-        history.push('/create-campaign/players');
+        setNewCampaign(
+            {
+                code: '',
+                created: null
+            }
+        )
+        // history.push('/campaign/add-players');
     }
 
     return (
@@ -43,7 +51,8 @@ const CreateCampaignForm = props => {
 
 const mapStateToProps = state => {
    return {
-    isPosting: state.isPosting
+    isPosting: state.isPosting,
+    error: state.error
    } 
 }
 
