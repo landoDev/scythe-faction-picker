@@ -42,7 +42,9 @@ export const campaignReducer = (state = initialState, action) => {
     case SET_ERROR:
         return {
             ...state,
-            error: action.payload
+            error: action.payload,
+            isFetching: false,
+            isPosting: false
         };
     case FETCH_DATA:
     return {
