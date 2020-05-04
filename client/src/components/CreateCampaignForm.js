@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { createCampaign } from '../actions/index'
-import { Link } from 'react-router-dom';
-import { Button } from 'reactstrap';
+import { Link, useHistory } from 'react-router-dom';
+import { Button, Spinner } from 'reactstrap';
 
 const CreateCampaignForm = props => {
-    const [newCampaign, setNewCampaign] = {
+    const history = useHistory();
+    console.log(history)
+    const [newCampaign, setNewCampaign] = useState({
         code: '',
         created: null
-    }
+    });
     const handleChanges = (e) => {
         setNewCampaign({
           ...newCampaign,
@@ -17,21 +19,23 @@ const CreateCampaignForm = props => {
       };
 
 
-    const onSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         let utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
         newCampaign.created = utc;
         props.createCampaign(newCampaign);
+        history.push('/create-campaign/players');
     }
 
     return (
         <div>
             <h2>New Campaign</h2>
             <p>Give your Campaign a code, you will need it to find it later</p>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>Code:</label>
                 <input type='text' name='code' />
-                <Button color='primary' type='submit'>Create</Button>
+                {props.isPosting ? <Spinner className='add-btn' color='warning' />
+                : <Button color='primary' type='submit'>Create</Button>}
             </form>
         </div>
     )

@@ -64,7 +64,7 @@ export const campaignReducer = (state = initialState, action) => {
     return {
         ...state,
         campaigns: [...state.campaigns, action.payload], // keep an eye on this, I think if I just make another get it will be fine. May double entries?
-        isFetching: false
+        isPosting: false
     }
     default:
     return state;
