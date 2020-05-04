@@ -4,7 +4,7 @@
   "description": "Simple FE app to randomize A faction to play as if you can't choose",
   "main": "index.js",
   "engines": {
-    "node": "12.16.x"
+    "node": "12.0.0"
   },
   "scripts": {
     "start": "node index.js",
