@@ -2,13 +2,36 @@
 
 import { 
     FETCH_DATA,
+    POST_DATA,
+    SET_ERROR,
     GET_CAMPAIGNS,
-    SET_ERROR
+    ADD_CAMPAIGN_SUCCESS
+    
 } from '../actions/index'
 
 const initialState = {
+    noPlayers: true, // state for quick form but can go elsewhere
+    factions: [
+        'Republic of Polania',
+        'Saxony Empire', 
+        'Crimean Khanate',
+        'Nordic Kingdoms',
+        'Rusviet Union',
+        'Clan Albion',
+        'Togawa Shogunate'
+    ],
+    playerMats: [
+        'Engineering (2)',
+        'Patriotic (3)',
+        'Industrial (1)',
+        'Agricultural (5)',
+        'Innovative (3A)',
+        'Militant (2A)',
+        'Mechanical (4)'
+    ],
     campaigns: [],
     isFetching: false,
+    isPosting: false,
     error: ''
 }
 
