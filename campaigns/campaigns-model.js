@@ -17,7 +17,7 @@ function find() {
     return db('campaigns')
     .join('campaigns_players as cp', 'cp.campaign_id', 'campaigns.id' )
     .join('players', 'players.id', 'cp.player_id')
-    .select('player_name', 'faction')
+    .select('*')
 }
 
 function findBy(filter) {
