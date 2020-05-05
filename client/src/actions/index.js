@@ -32,6 +32,8 @@ export const createCampaign = (payload) => dispatch =>{
       dispatch({type: SET_ERROR, payload: 'Error adding campaigns'})
     })
   };
+
+// add players function will have to take an id to dynamically assign it and post the player to that id in the BE. Find the campaign by it's id, then grab that id and plug it into the axios post with the new player created. 🤞🏾
   
 
 
