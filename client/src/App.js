@@ -9,11 +9,18 @@ import AddPlayers from './components/AddPlayers';
 // import { Button, Spinner } from 'reactstrap';
 import './App.css';
 import { Button } from 'reactstrap';
+import { connect } from 'react-redux';
+import { getCampaignsAll } from './actions/index'
 
 
 
-function App() {
+const App = props => {
   console.log('Ahem... Can I help you? 🤨');
+  useEffect(()=> {
+    props.getCampaignsAll();
+  }, [])
+
+  console.log('campaigns on mount?', props.campaigns)
 
   return (
     <div className="App">
@@ -44,4 +51,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state =>{
+  return {
+    campaigns: state.campaigns
+  }
+}
+
+export default connect(mapStateToProps, { getCampaignsAll }) (App);

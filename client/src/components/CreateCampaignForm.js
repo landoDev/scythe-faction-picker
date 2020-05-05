@@ -59,8 +59,8 @@ const CreateCampaignForm = props => {
 
     const handlePlayerSubmit = (e) => {
         e.preventDefault();
-        let { id } = yourCampaign
-        props.addPlayerCampaign(id, newPlayer);
+        let campaignId = yourCampaign.id;
+        props.addPlayerCampaign(campaignId, newPlayer);
         grabCampaign();
     }
     const pickFaction = () =>{
@@ -74,16 +74,19 @@ const CreateCampaignForm = props => {
     }
     const handlePlayerSubmitRandom = (e) => {
         e.preventDefault();
-        let { id } = yourCampaign
+        console.log('in add player', yourCampaign)
+        let campaignId = yourCampaign.id
         let randomFaction = pickFaction()
         newPlayer.faction = randomFaction;
-        props.addPlayerCampaign(id, newPlayer);
+        props.addPlayerCampaign(campaignId, newPlayer);
         grabCampaign();
     }
 
     const grabCampaign = () => {
-        let theCampaigns = props.getCampaignsAll()
-        const thisCampaign = theCampaigns.find(campaign => campaign.code === newCampaign.code)
+        let theCampaigns = props.campaigns
+        console.log('the Campaign', theCampaigns)
+        const thisCampaign = theCampaigns.filter(campaign => campaign.code === newCampaign.code)
+        console.log('this campaign', thisCampaign)
         setYourCampaign(thisCampaign);
     }
 
@@ -116,7 +119,7 @@ const CreateCampaignForm = props => {
                     }}>We know our Factions</Button>
                 <Button color='success' onClick={()=>{ 
                     setAddPlayers({...addPlayers, randomize: true})
-                    grabCampaign()
+                    grabCampaign();
                     }}>Pick Factions at random</Button> 
             </div>
             : <span></span> }
