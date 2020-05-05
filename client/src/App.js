@@ -4,10 +4,12 @@ import { Route, Link } from 'react-router-dom';
 // Component Imports
 import QuickFactionForm from './components/QuickFactionForm';
 import CreateCampaignForm from './components/CreateCampaignForm';
+import Dashboard from './components/Dashboard';
 import AddPlayers from './components/AddPlayers';
 // import { Button, Spinner } from 'reactstrap';
 import './App.css';
 import { Button } from 'reactstrap';
+
 
 
 function App() {
@@ -31,10 +33,12 @@ function App() {
       <Route path='/create-campaign'>
         <CreateCampaignForm />
       </Route>
-      {/* Route below is obsolete */}
-      {/* <Route exact path='/campaign/add-players'>
-        <AddPlayers />
-      </Route> */}
+      <Route path='/find-campaign'>
+        <h2>Component not implemented yet</h2>
+      </Route>
+      <Route path='/dashboard'>
+        <Dashboard />
+      </Route>
       <footer className='signature'>Developed by Landon Turner</footer>
     </div>
   );
