@@ -5,7 +5,8 @@ import {
     POST_DATA,
     SET_ERROR,
     GET_CAMPAIGNS,
-    ADD_CAMPAIGN_SUCCESS
+    ADD_CAMPAIGN_SUCCESS,
+    ADD_PLAYER_SUCCESS
     
 } from '../actions/index'
 
@@ -32,7 +33,8 @@ const initialState = {
     campaigns: [],
     isFetching: false,
     isPosting: false,
-    error: ''
+    error: '',
+    readyToMount: false
 }
 
 export const campaignReducer = (state = initialState, action) => {
@@ -66,6 +68,11 @@ export const campaignReducer = (state = initialState, action) => {
     return {
         ...state,
         campaigns: [...state.campaigns, action.payload], // keep an eye on this, I think if I just make another get it will be fine. May double entries?
+        isPosting: false
+    }
+    case ADD_PLAYER_SUCCESS:
+    return {
+        ...state,
         isPosting: false
     }
     default:

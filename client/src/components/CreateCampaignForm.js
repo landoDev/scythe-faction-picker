@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { createCampaign, getCampaignsAll } from '../actions/index'
+import { createCampaign, getCampaignsAll, addPlayerCampaign } from '../actions/index'
 import { Link, useHistory } from 'react-router-dom';
 import { Button, Spinner } from 'reactstrap';
 
@@ -13,17 +13,32 @@ const CreateCampaignForm = props => {
         userInput: false,
         randomize: false
     })
+    // local state to post campaign
+    const [yourCampaign, setYourCampaign] = useState()
+    // local state to take from factions
+    const [factionArr, setFactionArr] = useState(props.factions)
     const [showContinue, setShowContinue] = useState(false) // used to render page with given order of conditions
     const [newCampaign, setNewCampaign] = useState({
         code: '',
         created: null
     });
-    const handleChanges = (e) => {
+    const [newPlayer, setNewPlayer] = useState({
+        player_name: '',
+        faction: ''
+    })
+    const handleChangesCampaigns = (e) => {
         setNewCampaign({
           ...newCampaign,
           [e.target.name]: e.target.value
         });
       };
+    
+    const handleChangesPlayers = (e) => {
+    setNewPlayer({
+        ...newPlayer,
+        [e.target.name]: e.target.value
+    });
+    };
 
       // Maybe change this to handle campaign submit then submit the campaign and players together later? 
     const handleCampaignSubmit = (e) => {
@@ -42,15 +57,42 @@ const CreateCampaignForm = props => {
         : alert('There was an error adding the campaign, please try again')}
     }
 
-    // instead of this use effect, pass the new code to find campaign by id, then use that id to plug dynamically into the post.. all in the same action and out of this component
-    // useEffect(() =>{
-    //     getCampaignsAll();
-    //     props.campaigns.filter(campaign => {
-    //         let thisCampaign = campaign.code === newCampaign.code
-    //         return thisCampaign;
-    //     })
-    // }, [addPlayers])
+    const handlePlayerSubmit = (e) => {
+        e.preventDefault();
+        let { id } = yourCampaign
+        props.addPlayerCampaign(id, newPlayer);
+        grabCampaign();
+    }
+    const pickFaction = () =>{
+        let draw = Math.floor(Math.random() * factionArr.length);
+        const chosen = factionArr[draw];
+        let updatedList = factionArr.filter(faction => {
+          return faction !== chosen;
+        })
+        setFactionArr(updatedList);
+        return chosen;
+    }
+    const handlePlayerSubmitRandom = (e) => {
+        e.preventDefault();
+        let { id } = yourCampaign
+        let randomFaction = pickFaction()
+        newPlayer.faction = randomFaction;
+        props.addPlayerCampaign(id, newPlayer);
+        grabCampaign();
+    }
+
+    const grabCampaign = () => {
+        let theCampaigns = props.getCampaignsAll()
+        const thisCampaign = theCampaigns.find(campaign => campaign.code === newCampaign.code)
+        setYourCampaign(thisCampaign);
+    }
+
+    const finalSubmit = () => {
+        window.localStorage.setItem('campaign_id', yourCampaign.id)
+        history.push('/dashboard');
+    }
     console.log('check changes', newCampaign)
+    console.log('redux campaign', props.campaigns)
     return (
         <div>
             { showContinue ? <span></span>
@@ -60,7 +102,7 @@ const CreateCampaignForm = props => {
                 <p>Give your Campaign a codename, you will need it to find it later</p>
                 <form onSubmit={handleCampaignSubmit}>
                     <label>codename:</label>
-                    <input type='text' name='code' onChange={handleChanges} />
+                    <input type='text' name='code' onChange={handleChangesCampaigns} />
                     {props.isPosting ? <Spinner className='add-btn' color='warning' />
                     : <Button color='primary' type='submit'>Create</Button>}
                 </form>
@@ -68,20 +110,27 @@ const CreateCampaignForm = props => {
             }
             { showContinue ? // if form submitted prompt to view the rest of the page
             <div>
-                <Button color='success' onClick={()=>{ setAddPlayers({...addPlayers, userInput: true})}}>We know our Factions</Button>
-                <Button color='success' onClick={()=>{ setAddPlayers({...addPlayers, randomize: true})}}>Pick Factions at random</Button> 
+                <Button color='success' onClick={()=>{ 
+                    setAddPlayers({...addPlayers, userInput: true})
+                    grabCampaign()
+                    }}>We know our Factions</Button>
+                <Button color='success' onClick={()=>{ 
+                    setAddPlayers({...addPlayers, randomize: true})
+                    grabCampaign()
+                    }}>Pick Factions at random</Button> 
             </div>
             : <span></span> }
             { addPlayers.userInput ?             
                 <div className='know-factions'>
                     <h2>Add Players to campaign</h2>
                     {/* Add spinners after I get fetching/posting state from props */}
-                    <form>
+                    <form onSubmit={finalSubmit}>
                         <label className='name-label'>Player Name</label>
-                        <input name='name' />
+                        <input name='player_name' onChange={handleChangesPlayers} />
                         <label className='faction-label'>Faction</label>
-                        <input name='faction' />
-                        <Button className='add-btn' color='success'>Add</Button>
+                        <input name='faction' onChange={handleChangesPlayers} />
+                        {props.isPosting ? <Spinner className='add-btn' color='warning' />
+                        : <Button className='add-btn' color='success' onClick={handlePlayerSubmit}>Add</Button> }
                         <Button className='add-btn' type='submit' color='warning'>Finish Creating Campaign</Button>
                     </form>
                 </div>
@@ -89,10 +138,11 @@ const CreateCampaignForm = props => {
             addPlayers.randomize ?
                 <div className='random-factions'>
                     <h2>Add Players to campaign</h2>
-                    <form>
+                    <form onSubmit={finalSubmit}>
                         <label className='name-label'>Player Name (Factions will Randomize)</label>
-                        <input name='name' />
-                        <Button className='add-btn' color='success'>Add</Button>
+                        <input name='name' onChange={handleChangesPlayers}/>
+                        {props.isPosting ? <Spinner className='add-btn' color='warning' />
+                        : <Button className='add-btn' color='success' onClick={handlePlayerSubmitRandom}>Add</Button> }
                         <Button className='add-btn' type='submit' color='warning'>Finish Creating Campaign</Button>
                     </form>
                 </div>
@@ -105,9 +155,10 @@ const CreateCampaignForm = props => {
 const mapStateToProps = state => {
    return {
     campaigns: state.campaigns,
+    factions: state.factions,
     isPosting: state.isPosting,
     error: state.error
    } 
 }
 
-export default connect(mapStateToProps, { createCampaign })(CreateCampaignForm);
+export default connect(mapStateToProps, { createCampaign, getCampaignsAll, addPlayerCampaign })(CreateCampaignForm);
