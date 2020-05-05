@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'reactstrap';
 
 
 const AddPlayers = props => {
+    // useEffect(() => {
 
+    // })
     // need handle changes, either imported, written or passed through props
     return (
         <div>

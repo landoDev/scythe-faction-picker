@@ -6,9 +6,7 @@ import { Button, Spinner } from 'reactstrap';
 
 const CreateCampaignForm = props => {
     const history = useHistory();
-    if(props.error === ''){
-        console.log('error is an empty string')
-    }
+    const [showContinue, setShowContinue] = useState(false)
     const [newCampaign, setNewCampaign] = useState({
         code: '',
         created: null
@@ -29,19 +27,26 @@ const CreateCampaignForm = props => {
         setNewCampaign(newCampaign)
         console.log('new campaign', newCampaign)
         props.createCampaign(newCampaign);
-        // history.push('/campaign/add-players');
+        setShowContinue(true) // used to show the continue button
+    }
+    // handleError checks to see if the campaign had an error on submit and keeps users from adding players to nothing
+    const handleError = e =>{
+        {props.error === '' ? history.push('campaign/add-players')
+        : alert('There was an error adding the campaign, please try again')}
     }
     console.log('check changes', newCampaign)
     return (
         <div>
             <h2>New Campaign</h2>
-            <p>Give your Campaign a code, you will need it to find it later</p>
+            <p>Give your Campaign a codename, you will need it to find it later</p>
             <form onSubmit={handleSubmit}>
-                <label>Code:</label>
+                <label>codename:</label>
                 <input type='text' name='code' onChange={handleChanges} />
                 {props.isPosting ? <Spinner className='add-btn' color='warning' />
                 : <Button color='primary' type='submit'>Create</Button>}
             </form>
+            { showContinue ? <Button color='success' onClick={handleError}>Continue</Button> 
+            : <span></span> }
         </div>
     )
 }
