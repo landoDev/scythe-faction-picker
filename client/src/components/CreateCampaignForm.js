@@ -59,7 +59,7 @@ const CreateCampaignForm = props => {
 
     const handlePlayerSubmit = (e) => {
         e.preventDefault();
-        let campaignId = yourCampaign.id;
+        let campaignId = yourCampaign[0].id;
         props.addPlayerCampaign(campaignId, newPlayer);
         grabCampaign();
     }
@@ -75,9 +75,10 @@ const CreateCampaignForm = props => {
     const handlePlayerSubmitRandom = (e) => {
         e.preventDefault();
         console.log('in add player', yourCampaign)
-        let campaignId = yourCampaign.id
+        let campaignId = yourCampaign[0].id
         let randomFaction = pickFaction()
         newPlayer.faction = randomFaction;
+        console.log('New player', newPlayer)
         props.addPlayerCampaign(campaignId, newPlayer);
         grabCampaign();
     }
@@ -91,11 +92,12 @@ const CreateCampaignForm = props => {
     }
 
     const finalSubmit = () => {
-        window.localStorage.setItem('campaign_id', yourCampaign.id)
+        window.localStorage.setItem('campaign_id', yourCampaign[0].id)
         history.push('/dashboard');
     }
     console.log('check changes', newCampaign)
     console.log('redux campaign', props.campaigns)
+    console.log('your campaign state', yourCampaign)
     return (
         <div>
             { showContinue ? <span></span>
@@ -143,7 +145,7 @@ const CreateCampaignForm = props => {
                     <h2>Add Players to campaign</h2>
                     <form onSubmit={finalSubmit}>
                         <label className='name-label'>Player Name (Factions will Randomize)</label>
-                        <input name='name' onChange={handleChangesPlayers}/>
+                        <input name='player_name' onChange={handleChangesPlayers}/>
                         {props.isPosting ? <Spinner className='add-btn' color='warning' />
                         : <Button className='add-btn' color='success' onClick={handlePlayerSubmitRandom}>Add</Button> }
                         <Button className='add-btn' type='submit' color='warning'>Finish Creating Campaign</Button>

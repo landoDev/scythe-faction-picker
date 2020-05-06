@@ -15,9 +15,9 @@ module.exports = {
 function find() {
 //   return db("campaigns").select('*');
     return db('campaigns')
-    .join('campaigns_players as cp', 'cp.campaign_id', 'campaigns.id' )
-    .join('players', 'players.id', 'cp.player_id')
-    .select('*')
+    // .join('campaigns_players as cp', 'cp.campaign_id', 'campaigns.id' )
+    // .join('players', 'players.id', 'cp.player_id')
+    // .select('*')
 }
 
 function findBy(filter) {

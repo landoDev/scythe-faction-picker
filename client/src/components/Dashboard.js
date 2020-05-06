@@ -10,11 +10,12 @@ const Dashboard = props =>{
     useEffect(() => {
         let campaignId = window.localStorage.getItem('campaign_id');
         let campaignArr = props.campaigns;
+        console.log('campaigns in dashboard', campaignArr)
         let findCampaign = campaignArr.filter(campaign => {
             return campaign.id === campaignId;
         })
         setThisCampaign(findCampaign);
-    })
+    }, [])
 
     const pickMat = () =>{
         let draw = Math.floor(Math.random() * mats.length);
@@ -25,10 +26,10 @@ const Dashboard = props =>{
         setMats(updatedList);
         return chosen;
     }
-
+    console.log('campaign in dashboard', thisCampaign)
     return(
         <div>
-            <h2>{thisCampaign.code}</h2>
+            {/* <h2>{thisCampaign[0].code}</h2>
             {thisCampaign.players.map(player=> {
                 return (
                     <div>
@@ -42,7 +43,7 @@ const Dashboard = props =>{
 
                     </div>
                 )
-            })}
+            })} */}
             {/* button to add player mat */}
         </div>
     )
