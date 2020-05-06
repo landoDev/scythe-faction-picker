@@ -38,13 +38,13 @@ const Dashboard = props =>{
     }
 
     return(
-        <div>
+        <div className='qk-faction-form'>
             <h2>Campaign: {props.active_campaign.code}</h2>
             { props.readyToMount ? 
             <div>
             {props.active_campaign.players.map(player=> {
                 return (
-                    <div>
+                    <div key={player.id}>
                         <h3>{player.player_name}</h3>
                         <p>{player.faction}</p>
                         <div className='mat-btn'>
