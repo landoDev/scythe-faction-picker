@@ -5,6 +5,7 @@ import {
     POST_DATA,
     SET_ERROR,
     GET_CAMPAIGNS,
+    GET_CAMPAIGN_BY_ID,
     ADD_CAMPAIGN_SUCCESS,
     ADD_PLAYER_SUCCESS
     
@@ -63,6 +64,13 @@ export const campaignReducer = (state = initialState, action) => {
             ...state,
             campaigns: action.payload,
             isFetching: false
+        }
+    case GET_CAMPAIGN_BY_ID:
+        return {
+            ...state,
+            campaigns: action.payload,
+            isFetching: false,
+            readyToMount: true
         }
     case ADD_CAMPAIGN_SUCCESS:
     return {

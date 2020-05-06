@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
+import { getCampaignById } from '../actions/index'
 
 const Dashboard = props =>{
+
     const [showMat, setShowMat] = useState(false)
     const [mats, setMats] = useState(props.playerMats)
-    const [thisCampaign, setThisCampaign] = useState()
+    const [thisCampaign, setThisCampaign] = useState();
+    const [mountCampaign, setMountCampaign] = useState(props.campaigns)
 
+  
+
+    // fix useeffect, campaignArr is undefined
+    console.log('campaign state in dashboard initially', props.campaigns)
+    console.log('player mats', props.playerMats)
+
+    // maybe route created campaigns to find campaign forms since this useEffect doesn't work
     useEffect(() => {
+        console.log('useEffect runs')
         let campaignId = window.localStorage.getItem('campaign_id');
-        let campaignArr = props.campaigns;
-        console.log('campaigns in dashboard', campaignArr)
-        let findCampaign = campaignArr.filter(campaign => {
-            return campaign.id === campaignId;
-        })
-        setThisCampaign(findCampaign);
+        // let findCampaign = props.campaigns.filter(campaign => {
+        //     return campaign.id === campaignId;
+        // })
+        let campaign = props.getCampaignById(campaignId);
+        setThisCampaign(campaign);
     }, [])
 
     const pickMat = () =>{
@@ -26,11 +36,11 @@ const Dashboard = props =>{
         setMats(updatedList);
         return chosen;
     }
-    console.log('campaign in dashboard', thisCampaign)
+    console.log('the campaign', thisCampaign)
     return(
         <div>
-            {/* <h2>{thisCampaign[0].code}</h2>
-            {thisCampaign.players.map(player=> {
+            {/* <h2>Campaign: {props.campaigns.code}</h2>
+            {props.campaigns.players.map(player=> {
                 return (
                     <div>
                         <h3>{player.player_name}</h3>
@@ -43,8 +53,8 @@ const Dashboard = props =>{
 
                     </div>
                 )
-            })} */}
-            {/* button to add player mat */}
+            })}
+            button to add player mat */}
         </div>
     )
 }
@@ -52,8 +62,10 @@ const Dashboard = props =>{
 const mapStateToProps = state => {
     return {
         campaigns: state.campaigns,
-        playerMats: state.playerMats
+        playerMats: state.playerMats,
+        isFetching: state.isFetching,
+        readyToMount: state.readyToMount
     }
 }
 
-export default connect(mapStateToProps, {})(Dashboard)
+export default connect(mapStateToProps, { getCampaignById })(Dashboard)

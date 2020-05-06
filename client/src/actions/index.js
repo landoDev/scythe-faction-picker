@@ -3,6 +3,7 @@ import axios from 'axios';
 export const FETCH_DATA = 'FETCH_DATA';
 export const POST_DATA = 'POST_DATA';
 export const GET_CAMPAIGNS = 'GET_CAMPAIGNS';
+export const GET_CAMPAIGN_BY_ID = 'GET_CAMPAIGN_BY_ID';
 export const SET_ERROR = 'SET_ERROR';
 export const ADD_CAMPAIGN_SUCCESS = 'ADD_CAMPAIGN';
 export const ADD_PLAYER_SUCCESS = 'ADD_PLAYER_SUCCESS';
@@ -33,6 +34,18 @@ export const createCampaign = (payload) => dispatch =>{
       dispatch({type: SET_ERROR, payload: 'Error adding campaigns'})
     })
   };
+
+  export const getCampaignById = (id) => dispatch => {
+    dispatch({type: FETCH_DATA});
+    axios.get(`https://scythe-campaigns.herokuapp.com/api/campaigns/${id}`)
+    .then(res=>{
+      dispatch({type: GET_CAMPAIGN_BY_ID, payload: res.data})
+    })
+    .catch(err=>{
+      console.log(err)
+      dispatch({type: SET_ERROR, payload: 'Error getting campaign'})
+    })
+  }
 
   export const addPlayerCampaign = (id, payload) => dispatch =>{
     console.log('just before post')
