@@ -32,6 +32,7 @@ const initialState = {
         'Mechanical (4)'
     ],
     campaigns: [],
+    active_campaign: {},
     isFetching: false,
     isPosting: false,
     error: '',
@@ -68,7 +69,7 @@ export const campaignReducer = (state = initialState, action) => {
     case GET_CAMPAIGN_BY_ID:
         return {
             ...state,
-            campaigns: action.payload,
+            active_campaign: action.payload,
             isFetching: false,
             readyToMount: true
         }
