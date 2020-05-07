@@ -64,7 +64,8 @@ export const campaignReducer = (state = initialState, action) => {
         return {
             ...state,
             campaigns: action.payload,
-            isFetching: false
+            isFetching: false,
+            readyToMount: true
         }
     case GET_CAMPAIGN_BY_ID:
         return {

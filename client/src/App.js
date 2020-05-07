@@ -11,6 +11,7 @@ import './App.css';
 import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getCampaignsAll } from './actions/index'
+import FindCampaignForm from './components/FindCampaignForm';
 
 
 
@@ -34,14 +35,16 @@ const App = props => {
             <Button color='primary' size='lg'>Create a Campaign</Button>
           </Link>
           {/* Add Link to or add a state that hides the search form for find button */}
-          <Button color='primary' size='lg'>Find a Campaign</Button>
+          <Link to='/find-campaign'>
+            <Button color='primary' size='lg'>Find a Campaign</Button>
+          </Link>
         </div>
       </Route>
       <Route path='/create-campaign'>
         <CreateCampaignForm />
       </Route>
       <Route path='/find-campaign'>
-        <h2>Component not implemented yet</h2>
+        <FindCampaignForm />
       </Route>
       <Route path='/dashboard'>
         <Dashboard />
