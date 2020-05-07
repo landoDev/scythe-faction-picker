@@ -30,7 +30,7 @@ const App = props => {
     <div className="App">
       <Route exact path='/'>
         <header>
-          <h1 className='title'>Scythe Faction Selector</h1>
+          <h1 className='title'>Scythe Faction Manager</h1>
         </header>
         <QuickFactionForm />
         <ActionHomeDiv>
