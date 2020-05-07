@@ -92,8 +92,7 @@ const CreateCampaignForm = props => {
         setYourCampaign(thisCampaign);
     }
 
-    const finalSubmit = e => {
-        e.preventDefault()
+    const finalSubmit = () => {
         window.localStorage.setItem('campaign_id', yourCampaign[0].id)
         history.push('/dashboard');
     }
