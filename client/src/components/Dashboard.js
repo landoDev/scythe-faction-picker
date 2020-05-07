@@ -38,29 +38,33 @@ const Dashboard = props =>{
     }
 
     return(
-        <div className='qk-faction-form'>
-            <h2>Campaign: {props.active_campaign.code}</h2>
-            { props.readyToMount ? 
-            <div>
-            {props.active_campaign.players.map(player=> {
-                return (
-                    <div key={player.id}>
-                        <h3>{player.player_name}</h3>
-                        <p>{player.faction}</p>
-                        <div className='mat-btn'>
-                        {showMat ? <p>{thisMat}</p>
-                        : <div>
-                        <Button color='success' onClick={()=>{
-                         pickMat()   
-                         setShowMat(true)
-                        }}>Roll Mat</Button>
-                        </div>
-                        }
-                        </div>
+        <div>
+            { props.readyToMount ?
+            <div className='campaign-container'>
+                <div className='title-container'>
+                    <h2>Campaign: {props.active_campaign.code}</h2>
+                </div>
+                <div>
+                {props.active_campaign.players.map(player=> {
+                    return (
+                        <div key={player.id}>
+                            <h3>{player.player_name}</h3>
+                            <p>{player.faction}</p>
+                            <div className='mat-btn'>
+                            {showMat ? <p>{thisMat}</p>
+                            : <div>
+                            <Button color='success' onClick={()=>{
+                            pickMat()   
+                            setShowMat(true)
+                            }}>Roll Mat</Button>
+                            </div>
+                            }
+                            </div>
 
-                    </div>
-                )
-            })}
+                        </div>
+                    )
+                })}
+                </div>
             </div>
             : <div>Loading Players...</div>}
         </div>

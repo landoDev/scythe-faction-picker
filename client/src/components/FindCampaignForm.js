@@ -21,13 +21,7 @@ const FindCampaignForm = props => {
       };
     
     console.log('campaigns in find', props.campaigns)
-    // const handleError = e =>{
-    //     {props.error === '' ? history.push('campaign/add-players')
-    //     : alert('There was an error adding the campaign, please try again')}
-    // }
-    // const redirect = async () =>{
-    //     aw
-    // }
+
 
     const grabCampaign = () => {
         let theCampaigns = props.campaigns

@@ -47,7 +47,7 @@ const App = props => {
         <FindCampaignForm />
       </Route>
       <Route path='/dashboard'>
-        <Dashboard />
+        <Dashboard campaigns={props.campaigns} />
       </Route>
       <footer className='signature'>Developed by Landon Turner</footer>
     </div>
