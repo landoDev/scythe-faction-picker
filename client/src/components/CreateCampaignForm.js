@@ -112,7 +112,7 @@ const CreateCampaignForm = props => {
                     <label className='form-text'>Codename:</label>
                     <input type='text' name='code' onChange={handleChangesCampaigns} />
                     {props.isPosting ? <Spinner className='add-btn' color='warning' />
-                    : <Button color='primary' type='submit'>Create</Button>}
+                    : <Button color='success' type='submit'>Create</Button>}
                 </form>
                 </div>
             </CampaignFormDiv>

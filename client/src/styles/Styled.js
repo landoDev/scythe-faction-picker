@@ -73,3 +73,19 @@ export const CampaignFormDiv = styled.div`
     }
 
 `;
+
+export const NavbarStyle = styled.nav`
+    display: flex;
+    background-color: black;
+    padding: 2%;
+    justify-content: flex-end;
+    a {
+        margin-right: 5%;
+        text-decoration: none;
+        color: white;
+    }
+    a:hover {
+        text-decoration: underline;
+        color: red;
+    }
+`;

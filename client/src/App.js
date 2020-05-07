@@ -12,7 +12,7 @@ import './App.css';
 import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getCampaignsAll } from './actions/index'
-import { ActionHomeDiv } from './styles/Styled'
+import { ActionHomeDiv, NavbarStyle } from './styles/Styled'
 
 
 
@@ -28,6 +28,9 @@ const App = props => {
 
   return (
     <div className="App">
+      <NavbarStyle>
+        <Link className='home' to='/'>Home</Link>
+      </NavbarStyle>
       <Route exact path='/'>
         <header>
           <h1 className='title'>Scythe Faction Manager</h1>
