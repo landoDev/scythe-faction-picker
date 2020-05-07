@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createCampaign, getCampaignsAll, addPlayerCampaign } from '../actions/index'
 import { Link, useHistory } from 'react-router-dom';
 import { Button, Spinner } from 'reactstrap';
+import { CampaignFormDiv } from '../styles/Styled'
 
 const CreateCampaignForm = props => {
     const history = useHistory();
@@ -102,16 +103,19 @@ const CreateCampaignForm = props => {
         <div>
             { showContinue ? <span></span>
             :
-            <div>
-                <h2>New Campaign</h2>
-                <p>Give your Campaign a codename, you will need it to find it later</p>
+            <CampaignFormDiv>
+                <h2 className='title'>New Campaign</h2>
+                <div className='form-container'>
+                <p className='form-text'> Give your Campaign a codename, you will need it to find it later</p>
+                
                 <form onSubmit={handleCampaignSubmit}>
-                    <label>codename:</label>
+                    <label className='form-text'>Codename:</label>
                     <input type='text' name='code' onChange={handleChangesCampaigns} />
                     {props.isPosting ? <Spinner className='add-btn' color='warning' />
                     : <Button color='primary' type='submit'>Create</Button>}
                 </form>
-            </div>
+                </div>
+            </CampaignFormDiv>
             }
             { showContinue ? // if form submitted prompt to view the rest of the page
             <div>
