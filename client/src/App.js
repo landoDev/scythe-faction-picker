@@ -5,15 +5,18 @@ import { Route, Link } from 'react-router-dom';
 import QuickFactionForm from './components/QuickFactionForm';
 import CreateCampaignForm from './components/CreateCampaignForm';
 import Dashboard from './components/Dashboard';
-import AddPlayers from './components/AddPlayers';
+import FindCampaignForm from './components/FindCampaignForm';
+
 // import { Button, Spinner } from 'reactstrap';
 import './App.css';
 import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getCampaignsAll } from './actions/index'
-import FindCampaignForm from './components/FindCampaignForm';
+import { ActionHomeDiv } from './styles/Styled'
 
 
+
+// THIS PAGES STYLING DOES NOT MAKE USE OF STYLED COMPONENTS AND IS VERY DEPENDENT ON APP.CSS
 
 const App = props => {
   console.log('Ahem... Can I help you? 🤨');
@@ -30,7 +33,7 @@ const App = props => {
           <h1 className='title'>Scythe Faction Selector</h1>
         </header>
         <QuickFactionForm />
-        <div className='home-actions'>
+        <ActionHomeDiv>
           <Link to='/create-campaign'>
             <Button color='primary' size='lg'>Create a Campaign</Button>
           </Link>
@@ -38,7 +41,7 @@ const App = props => {
           <Link to='/find-campaign'>
             <Button color='primary' size='lg'>Find a Campaign</Button>
           </Link>
-        </div>
+        </ActionHomeDiv>
       </Route>
       <Route path='/create-campaign'>
         <CreateCampaignForm />
@@ -49,7 +52,6 @@ const App = props => {
       <Route path='/dashboard'>
         <Dashboard campaigns={props.campaigns} />
       </Route>
-      <footer className='signature'>Developed by Landon Turner</footer>
     </div>
   );
 }

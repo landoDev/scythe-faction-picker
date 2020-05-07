@@ -101,7 +101,6 @@ const QuickFactionForm = () => {
           })
         }
       </div>
-      <footer className='signature'>Developed by Landon Turner</footer>
     </div>
   );
 };
