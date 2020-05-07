@@ -250,9 +250,15 @@ export const FindFormDiv = styled.div`
         padding: 5%;
         form {
             flex-direction: column;
-            input {
-                width: 100%;
-                margin-bottom: 5%;
+            .action-div{
+                flex-direction: column;
+                input {
+                    width: 100%;
+                    margin-bottom: 5%;
+                }
+                button {
+                    width: 60%;
+                }
             }
         }
     }
