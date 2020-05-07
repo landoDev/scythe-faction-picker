@@ -92,3 +92,18 @@ export const NavbarStyle = styled.nav`
         margin-left: 1.5%;
     }
 `;
+
+export const FactionCtaDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+    .faction-cta{
+        width: 50%;
+        margin: 5% 0;
+    }
+
+    @media(max-width: 600px){
+        flex-direction: column;
+    }
+`;

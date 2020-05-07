@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createCampaign, getCampaignsAll, addPlayerCampaign } from '../actions/index'
 import { Link, useHistory } from 'react-router-dom';
 import { Button, Spinner } from 'reactstrap';
-import { CampaignFormDiv } from '../styles/Styled'
+import { CampaignFormDiv, FactionCtaDiv } from '../styles/Styled'
 
 const CreateCampaignForm = props => {
     const history = useHistory();
@@ -118,16 +118,16 @@ const CreateCampaignForm = props => {
             </CampaignFormDiv>
             }
             { showContinue ? // if form submitted prompt to view the rest of the page
-            <div>
-                <Button color='success' onClick={()=>{ 
+            <FactionCtaDiv>
+                <Button className='faction-cta' color='success' onClick={()=>{ 
                     setAddPlayers({...addPlayers, userInput: true})
                     grabCampaign()
-                    }}>We know our Factions</Button>
-                <Button color='success' onClick={()=>{ 
+                    }} size='lg' >We know our Factions</Button>
+                <Button className='faction-cta' color='success' onClick={()=>{ 
                     setAddPlayers({...addPlayers, randomize: true})
                     grabCampaign();
-                    }}>Pick Factions at random</Button> 
-            </div>
+                    }}size='lg' >Pick Factions at random</Button> 
+            </FactionCtaDiv>
             : <span></span> }
             { addPlayers.userInput ?             
                 <div className='know-factions'>
