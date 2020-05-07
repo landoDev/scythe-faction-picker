@@ -12,7 +12,11 @@ import './App.css';
 import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getCampaignsAll } from './actions/index'
-import { ActionHomeDiv, NavbarStyle } from './styles/Styled'
+import { ActionHomeDiv, NavbarStyle } from './styles/Styled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+
 
 
 
@@ -29,7 +33,9 @@ const App = props => {
   return (
     <div className="App">
       <NavbarStyle>
-        <Link className='home' to='/'>Home</Link>
+        {/* May want to send people to the scythe github down the line */}
+        <a className='github' href='https://github.com/landoDev'><FontAwesomeIcon icon={faGithub} size='lg' /></a>
+        <Link className='home' to='/'><FontAwesomeIcon icon={faHome} size='lg' /></Link>
       </NavbarStyle>
       <Route exact path='/'>
         <header>

@@ -78,7 +78,7 @@ export const NavbarStyle = styled.nav`
     display: flex;
     background-color: black;
     padding: 2%;
-    justify-content: flex-end;
+    justify-content: space-between;
     a {
         margin-right: 5%;
         text-decoration: none;
@@ -87,5 +87,8 @@ export const NavbarStyle = styled.nav`
     a:hover {
         text-decoration: underline;
         color: red;
+    }
+    .github {
+        margin-left: 1.5%;
     }
 `;
