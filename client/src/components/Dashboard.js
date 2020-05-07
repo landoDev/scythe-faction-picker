@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 import { getCampaignById } from '../actions/index'
+import { PlayerDiv } from '../styles/Styled'
 
 const Dashboard = props =>{
 
@@ -39,21 +40,21 @@ const Dashboard = props =>{
 
     return(
         <div>
-            { props.readyToMount ?
+            { props.readyToMount && !props.isFetching ?
             <div className='campaign-container'>
                 <div className='title-container'>
-                    <h2>Campaign: {props.active_campaign.code}</h2>
+                    <h2 className='title' >Campaign: {props.active_campaign.code}</h2>
                 </div>
                 <div>
                 {props.active_campaign.players.map(player=> {
                     return (
-                        <div key={player.id}>
+                        <PlayerDiv key={player.id}>
                             <h3>{player.player_name}</h3>
                             <p>{player.faction}</p>
                             <div className='mat-btn'>
                             {showMat ? <p>{thisMat}</p>
                             : <div>
-                            <Button color='success' onClick={()=>{
+                            <Button color='success' size='sm' onClick={()=>{
                             pickMat()   
                             setShowMat(true)
                             }}>Roll Mat</Button>
@@ -61,7 +62,7 @@ const Dashboard = props =>{
                             }
                             </div>
 
-                        </div>
+                        </PlayerDiv>
                     )
                 })}
                 </div>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createCampaign, getCampaignsAll, addPlayerCampaign } from '../actions/index'
 import { Link, useHistory } from 'react-router-dom';
 import { Button, Spinner } from 'reactstrap';
-import { CampaignFormDiv, FactionCtaDiv } from '../styles/Styled'
+import { CampaignFormDiv, FactionCtaDiv, FactionFormDiv } from '../styles/Styled'
 
 const CreateCampaignForm = props => {
     const history = useHistory();
@@ -92,7 +92,7 @@ const CreateCampaignForm = props => {
         setYourCampaign(thisCampaign);
     }
 
-    const finalSubmit = () => {
+    const finalSubmit = e => {
         window.localStorage.setItem('campaign_id', yourCampaign[0].id)
         history.push('/dashboard');
     }
@@ -117,7 +117,8 @@ const CreateCampaignForm = props => {
                 </div>
             </CampaignFormDiv>
             }
-            { showContinue ? // if form submitted prompt to view the rest of the page
+            {/* may have to break below forms into another component */}
+            { showContinue ? // if form submitted prompt to view the rest of the page 
             <FactionCtaDiv>
                 <Button className='faction-cta' color='success' onClick={()=>{ 
                     setAddPlayers({...addPlayers, userInput: true})
@@ -130,31 +131,35 @@ const CreateCampaignForm = props => {
             </FactionCtaDiv>
             : <span></span> }
             { addPlayers.userInput ?             
-                <div className='know-factions'>
-                    <h2>Add Players to campaign</h2>
+                <FactionFormDiv>
+                    <h2 className='title'>Add Players to campaign</h2>
                     {/* Add spinners after I get fetching/posting state from props */}
+                    <div className='form-container'>
                     <form onSubmit={finalSubmit}>
-                        <label className='name-label'>Player Name</label>
+                        <label className='form-text'>Player Name</label>
                         <input name='player_name' onChange={handleChangesPlayers} />
-                        <label className='faction-label'>Faction</label>
+                        <label className='form-text'>Faction</label>
                         <input name='faction' onChange={handleChangesPlayers} />
                         {props.isPosting ? <Spinner className='add-btn' color='warning' />
                         : <Button className='add-btn' color='success' onClick={handlePlayerSubmit}>Add</Button> }
                         <Button className='add-btn' type='submit' color='warning'>Finish Creating Campaign</Button>
                     </form>
-                </div>
+                    </div>
+                </FactionFormDiv>
             : 
             addPlayers.randomize ?
-                <div className='random-factions'>
-                    <h2>Add Players to campaign</h2>
+                <FactionFormDiv>
+                    <h2 className='title'>Add Players to campaign</h2>
+                    <div className='form-container'>
                     <form onSubmit={finalSubmit}>
-                        <label className='name-label'>Player Name (Factions will Randomize)</label>
+                        <label className='form-text'>Player Name (Factions will Randomize)</label>
                         <input name='player_name' onChange={handleChangesPlayers}/>
                         {props.isPosting ? <Spinner className='add-btn' color='warning' />
                         : <Button className='add-btn' color='success' onClick={handlePlayerSubmitRandom}>Add</Button> }
                         <Button className='add-btn' type='submit' color='warning'>Finish Creating Campaign</Button>
                     </form>
-                </div>
+                    </div>
+                </FactionFormDiv>
             : <span></span>
             }
         </div>
