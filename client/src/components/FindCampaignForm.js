@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createCampaign, getCampaignsAll, addPlayerCampaign } from '../actions/index'
 import { Link, useHistory } from 'react-router-dom';
 import { Button, Spinner } from 'reactstrap';
+import { FindFormDiv } from '../styles/Styled'
 
 const FindCampaignForm = props => {
     const history = useHistory();
@@ -33,7 +34,6 @@ const FindCampaignForm = props => {
     }
 
     const finalSubmit = e => {
-        e.preventDefault();
         // grabCampaign();
         // console.log('find submit', yourCampaign)
         let theCampaigns = props.campaigns
@@ -45,17 +45,21 @@ const FindCampaignForm = props => {
     }
     console.log('findCampaign', findCampaign)
     return (
-        <div>
+        <FindFormDiv>
+            <div className='find-container'>
             <form onSubmit={finalSubmit}>
-                <label>Campaign Code:</label>
-                <input name='code' onChange={handleChanges} />
-                {props.readyToMount ? <Button type='submit' color='success'>Find Campaign</Button>
-                :<Button type='submit' color='success' disabled>Find Campaign</Button>
-                }
+                <label className='form-text'>Campaign Code:</label>
+                <div className='action-div'>
+                    <input name='code' onChange={handleChanges} />
+                    {props.readyToMount ? <Button type='submit' color='success'>Find Campaign</Button>
+                    :<Button type='submit' color='success' disabled>Find Campaign</Button>
+                    }
+                </div>
                 
                 
             </form>
-        </div>
+            </div>
+        </FindFormDiv>
     )
 }
 
